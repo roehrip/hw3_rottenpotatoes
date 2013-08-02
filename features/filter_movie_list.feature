@@ -23,9 +23,9 @@ Background: movies have been added to database
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
-  When I check the following ratings: PG R
+  When I check the following ratings: PG, R
   # enter step(s) to uncheck all other checkboxes
-  And I uncheck the following ratings: PG-13 G NC-17
+  And I uncheck the following ratings: PG-13, G, NC-17
   # enter step to "submit" the search form on the homepage
   And I press Refresh
   # enter step(s) to ensure that PG and R movies are visible
@@ -36,10 +36,10 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should not see the movie: "Chicken Run"
 
 Scenario: no ratings selected
-  When I check the following ratings: PG R
-  And I uncheck the following ratings: PG-13 G NC-17
+  When I check the following ratings: PG, R
+  And I uncheck the following ratings: PG-13, G, NC-17
   And I press Refresh
-  And I uncheck the following ratings: PG R PG-13 G NC-17
+  And I uncheck the following ratings: PG, R, PG-13, G, NC-17
   And I press Refresh
   # slecting no ratings should not do any change
   Then I should see the movie: "The Incredibles"
@@ -48,6 +48,6 @@ Scenario: no ratings selected
   And I should not see the movie: "Chicken Run"
 
 Scenario: all ratings selected
-  When I check the following ratings: PG R PG-13 G NC-17
+  When I check the following ratings: PG, R, PG-13, G, NC-17
   Then I should see all the movies
 
